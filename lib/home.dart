@@ -13,6 +13,7 @@ class _WeatherState extends State<Weather> {
     return Scaffold(
       backgroundColor: const Color(0xFF2F87CF),
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: const Color(0xFF2F87CF),
         title: const Center(
           child: Text(
@@ -149,42 +150,43 @@ class _WeatherState extends State<Weather> {
                 ),
               ],
             ),
-            const Expanded(
-              flex: 1,
-              child: Row(
-                children: [
-                  Text(
+            const Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Text(
                     "Monday",
                     style: TextStyle(color: Colors.white, fontSize: 22),
                   ),
-                  SizedBox(
-                    width: 40,
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.cloud,
+                        color: Colors.white,
+                        size: 22,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Storm",
+                        style: TextStyle(color: Colors.white, fontSize: 22),
+                      ),
+                    ],
                   ),
-                  Expanded(
-                    flex: 2,
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.cloud,
-                          color: Colors.white,
-                          size: 22,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Storm",
-                          style: TextStyle(color: Colors.white, fontSize: 22),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Text(
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Text(
                     "+21 +23",
                     style: TextStyle(color: Colors.white, fontSize: 22),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             const Expanded(
               flex: 1,
