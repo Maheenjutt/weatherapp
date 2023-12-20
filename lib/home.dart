@@ -36,11 +36,13 @@ class _WeatherState extends State<Weather> {
         child: Column(
           children: [
             Container(
-                padding: const EdgeInsets.all(20),
+                height: MediaQuery.of(context).size.height * 0.3,
+                padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 41, 155, 248),
                     borderRadius: BorderRadius.circular(16)),
                 child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -48,7 +50,7 @@ class _WeatherState extends State<Weather> {
                         Icon(
                           Icons.cloud,
                           color: Colors.white,
-                          size: 40,
+                          size: 80,
                         ),
                         Column(
                           children: [
@@ -58,9 +60,9 @@ class _WeatherState extends State<Weather> {
                                   TextStyle(color: Colors.white, fontSize: 18),
                             ),
                             Text(
-                              "23",
+                              "23\u00B0",
                               style: TextStyle(
-                                  fontSize: 30,
+                                  fontSize: 40,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white),
                             ),
@@ -73,8 +75,16 @@ class _WeatherState extends State<Weather> {
                         )
                       ],
                     ),
+                    SizedBox(
+                      height: 5,
+                    ),
                     Divider(
+                      indent: 20,
                       color: Colors.white,
+                      thickness: 0.08,
+                    ),
+                    SizedBox(
+                      height: 5,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -84,7 +94,7 @@ class _WeatherState extends State<Weather> {
                             Text(
                               "Wind",
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
+                                  TextStyle(color: Colors.white,fontSize: 15),
                             ),
                             Text(
                               "12.2km/h",
@@ -98,7 +108,7 @@ class _WeatherState extends State<Weather> {
                             Text(
                               "Humidity",
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
+                                  TextStyle(color: Colors.white, fontSize: 15),
                             ),
                             Text(
                               "50%",
@@ -112,7 +122,7 @@ class _WeatherState extends State<Weather> {
                             Text(
                               "Visibility",
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
+                                  TextStyle(color: Colors.white, fontSize: 15),
                             ),
                             Text(
                               "5km",
@@ -126,7 +136,7 @@ class _WeatherState extends State<Weather> {
                             Text(
                               "Pressure",
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
+                                  TextStyle(color: Colors.white, fontSize: 15),
                             ),
                             Text(
                               "1003 mb",
@@ -140,22 +150,26 @@ class _WeatherState extends State<Weather> {
                   ],
                 )),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             const Row(
               children: [
                 Text(
                   "Next 7 Days",
-                  style: TextStyle(color: Colors.white, fontSize: 25),
+                  style: TextStyle(color: Colors.white, fontSize: 30),
                 ),
               ],
             ),
+            const SizedBox(
+              height: 30,
+            ),
             const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Expanded(
                   flex: 1,
                   child: Text(
-                    "Monday",
+                    "Mon",
                     style: TextStyle(color: Colors.white, fontSize: 22),
                   ),
                 ),
@@ -188,233 +202,245 @@ class _WeatherState extends State<Weather> {
                 ),
               ],
             ),
-            const Expanded(
-              flex: 1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    "Tuesday",
+            const SizedBox(
+              height: 20,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    "Tue",
                     style: TextStyle(color: Colors.white, fontSize: 22),
                   ),
-                  SizedBox(
-                    width: 40,
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.cloud,
+                        color: Colors.white,
+                        size: 22,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Rain",
+                        style: TextStyle(color: Colors.white, fontSize: 22),
+                      ),
+                    ],
                   ),
-                  Expanded(
-                    flex: 2,
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.cloud,
-                          color: Colors.white,
-                          size: 22,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Rain",
-                          style: TextStyle(color: Colors.white, fontSize: 22),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Text(
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Text(
                     "+17 +20",
                     style: TextStyle(color: Colors.white, fontSize: 22),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            const Expanded(
-              flex: 1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    "Wednesday",
+            const SizedBox(
+              height: 20,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    "Wed",
                     style: TextStyle(color: Colors.white, fontSize: 22),
                   ),
-                  SizedBox(
-                    width: 40,
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.cloud,
+                        color: Colors.white,
+                        size: 22,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Cloudy",
+                        style: TextStyle(color: Colors.white, fontSize: 22),
+                      ),
+                    ],
                   ),
-                  Expanded(
-                    flex: 2,
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.cloud,
-                          color: Colors.white,
-                          size: 22,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Cloudy",
-                          style: TextStyle(color: Colors.white, fontSize: 22),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Text(
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Text(
                     "+27 +30",
                     style: TextStyle(color: Colors.white, fontSize: 22),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            const Expanded(
-              flex: 1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    "Thursday",
-                    style: TextStyle(color: Colors.white, fontSize: 22),
-                  ),
-                  SizedBox(
-                    width: 40,
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.cloud,
-                          color: Colors.white,
-                          size: 22,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Rain",
-                          style: TextStyle(color: Colors.white, fontSize: 22),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Text(
-                    "+22 +24",
-                    style: TextStyle(color: Colors.white, fontSize: 22),
-                  ),
-                ],
-              ),
+            const SizedBox(
+              height: 20,
             ),
-            const Expanded(
-              flex: 1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    "Friday",
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  "Thu",
+                  style: TextStyle(color: Colors.white, fontSize: 22),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.cloud,
+                        color: Colors.white,
+                        size: 22,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Rain",
+                        style: TextStyle(color: Colors.white, fontSize: 22),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    "+22\u00B0 +24\u00B0",
                     style: TextStyle(color: Colors.white, fontSize: 22),
                   ),
-                  SizedBox(
-                    width: 40,
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.cloud,
-                          color: Colors.white,
-                          size: 22,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Storm",
-                          style: TextStyle(color: Colors.white, fontSize: 22),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Text(
-                    "+21 +23",
-                    style: TextStyle(color: Colors.white, fontSize: 22),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-            const Expanded(
-              flex: 1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    "Saturday",
-                    style: TextStyle(color: Colors.white, fontSize: 22),
-                  ),
-                  SizedBox(
-                    width: 40,
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.cloud,
-                          color: Colors.white,
-                          size: 22,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Cloudy",
-                          style: TextStyle(color: Colors.white, fontSize: 22),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Text(
-                    "+31 +34",
-                    style: TextStyle(color: Colors.white, fontSize: 22),
-                  ),
-                ],
-              ),
+            const SizedBox(
+              height: 20,
             ),
-            const Expanded(
-              flex: 1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    "Sunday",
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  "Fri",
+                  style: TextStyle(color: Colors.white, fontSize: 22),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.cloud,
+                        color: Colors.white,
+                        size: 22,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Storm",
+                        style: TextStyle(color: Colors.white, fontSize: 22),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    "+21\u00B0 +23\u00B0",
                     style: TextStyle(color: Colors.white, fontSize: 22),
                   ),
-                  SizedBox(
-                    width: 40,
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  "Sat",
+                  style: TextStyle(color: Colors.white, fontSize: 22),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.cloud,
+                        color: Colors.white,
+                        size: 22,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Cloudy",
+                        style: TextStyle(color: Colors.white, fontSize: 22),
+                      ),
+                    ],
                   ),
-                  Expanded(
-                    flex: 2,
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.cloud,
-                          color: Colors.white,
-                          size: 22,
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          "Rain",
-                          style: TextStyle(color: Colors.white, fontSize: 22),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Text(
-                    "+19 +22",
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    "+31\u00B0 +34\u00B0",
                     style: TextStyle(color: Colors.white, fontSize: 22),
                   ),
-                ],
-              ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  "Sun",
+                  style: TextStyle(color: Colors.white, fontSize: 22),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.cloud,
+                        color: Colors.white,
+                        size: 22,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Rain",
+                        style: TextStyle(color: Colors.white, fontSize: 22),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Text(
+                    "+19\u00B0 +22\u00B0",
+                    style: TextStyle(color: Colors.white, fontSize: 22),
+                  ),
+                ),
+              ],
             )
           ],
         ),
