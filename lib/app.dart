@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/home.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -32,38 +33,37 @@ class _HomepageState extends State<Homepage> {
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Center(
               child: Icon(
                 Icons.cloud,
                 color: Colors.white,
-                size: 150,
+                size: 230,
               ),
             ),
-            const SizedBox(),
             const Text(
               "23\u00B0",
               style: TextStyle(
-                  fontSize: 80,
+                  fontSize: 120,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
             ),
             const Text(
               "Heavy Rain",
-              style: TextStyle(color: Colors.white, fontSize: 22),
+              style: TextStyle(color: Colors.white, fontSize: 30),
             ),
             const Text(
               "20 Dec 2023, 2:50PM",
-              style: TextStyle(color: Colors.white, fontSize: 15),
+              style: TextStyle(color: Colors.white, fontSize: 22),
             ),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Expanded(
-                  flex: 1,
+                  flex: 12,
                   child: Container(
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 41, 155, 248),
@@ -71,9 +71,22 @@ class _HomepageState extends State<Homepage> {
                     child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "Wind",
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.wind_power_outlined,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Wind",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                          ],
                         ),
                         Text(
                           "12.2km/h",
@@ -83,8 +96,9 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ),
                 ),
+                const Spacer(),
                 Expanded(
-                  flex: 1,
+                  flex: 12,
                   child: Container(
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 41, 155, 248),
@@ -92,9 +106,22 @@ class _HomepageState extends State<Homepage> {
                     child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "Humidity",
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.water,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Humidity",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                          ],
                         ),
                         Text(
                           "50%",
@@ -104,16 +131,16 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ),
                 ),
+                const Spacer(),
               ],
             ),
             const SizedBox(
-              height: 20,
+              height: 40,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Expanded(
-                  flex: 1,
+                  flex: 12,
                   child: Container(
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 41, 155, 248),
@@ -121,9 +148,22 @@ class _HomepageState extends State<Homepage> {
                     child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "Visibility",
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.remove_red_eye,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Visibility",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                          ],
                         ),
                         Text(
                           "5 km",
@@ -133,8 +173,9 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ),
                 ),
+                const Spacer(),
                 Expanded(
-                  flex: 1,
+                  flex: 12,
                   child: Container(
                     decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 41, 155, 248),
@@ -142,9 +183,22 @@ class _HomepageState extends State<Homepage> {
                     child: const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "Pressure",
-                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.air,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Pressure",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                          ],
                         ),
                         Text(
                           "1003 mb",
@@ -154,15 +208,23 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ),
                 ),
+                const Spacer(),
               ],
             ),
             const SizedBox(
-              height: 20,
+              height: 50,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push<void>(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => const Weather(),
+                  ),
+                );
+              },
               child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 100, vertical: 8),
+                padding: EdgeInsets.symmetric(horizontal: 100, vertical: 16),
                 child: Text(
                   "Next 7 Days",
                   style: TextStyle(fontSize: 22),
