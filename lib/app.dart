@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:myapp/home.dart';
 import 'package:http/http.dart' as http;
+
 // ignore: constant_identifier_names
 const APIKey = "d178238183d301867464f77d6acca3cb";
 
@@ -12,23 +14,42 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  late String dat;
-  double lat = 30.181459, long =71.492157;
-  Future<void> api () async {
-    http.Response response = await http.get(Uri.parse(
-        'http://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$long&appid=$APIKey&units=metric')); 
-        if (response.statusCode == 200) {
-          var data = response.body;
-          setState(() {
-            dat = data;
-          });
-        }
+  late String temp = "",
+      hum = "",
+      tempfl = "",
+      prs = "",
+      vis = "",
+      wthr = "",
+      loc = "",
+      ws = "",
+      icon = "";
+  var data;
+  var lat = 30.181459, long = 71.492157;
+  Future<void> api() async {
+    http.Response response = await http.get(Uri.parse('http://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$long&appid=$APIKey&units=metric'));
+    if (response.statusCode == 200) {
+      setState(() {
+       data = response.body.toString();
+        temp = jsonDecode(data)["main"]["temp"].toString();
+        hum = jsonDecode(data)["main"]["humidity"].toString();
+        tempfl = jsonDecode(data)["main"]["feels_like"].toString();
+        prs = jsonDecode(data)["main"]["pressure"].toString();
+        vis = jsonDecode(data)["visibility"].toString();
+        loc = jsonDecode(data)["name"].toString();
+        ws = jsonDecode(data)["wind"]["speed"].toString();
+      });
+    }
   }
+
   @override
   void initState() {
-   api();
+    api();
     super.initState();
   }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,9 +57,9 @@ class _HomepageState extends State<Homepage> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: const Color(0xFF2F87CF),
-        title: const Text(
-          "Multan",
-          style: TextStyle(fontSize: 25),
+        title:  Text(
+          loc,
+          style: const TextStyle(fontSize: 25),
         ),
         actions: const [
           Padding(
@@ -65,20 +86,20 @@ class _HomepageState extends State<Homepage> {
                       size: 230,
                     ),
                   ),
-                  const Text(
-                    "23\u00B0",
-                    style: TextStyle(
+                  Text(
+                    "$temp\u00B0",
+                    style: const TextStyle(
                         fontSize: 120,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),
-                  const Text(
-                    "Heavy Rain",
+                   const Text(
+                    "Feels like",
                     style: TextStyle(color: Colors.white, fontSize: 30),
                   ),
-                  const Text(
-                    "20 Dec 2023, 2:50PM",
-                    style: TextStyle(color: Colors.white, fontSize: 22),
+                   Text(
+                    tempfl,
+                    style: const TextStyle(color: Colors.white, fontSize: 22),
                   ),
                   const SizedBox(
                     height: 30,
@@ -91,28 +112,31 @@ class _HomepageState extends State<Homepage> {
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 41, 155, 248),
                               borderRadius: BorderRadius.circular(4)),
-                          child: const Row(
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.wind_power_outlined,
                                 color: Colors.white,
                                 size: 40,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
-                              Column(children: [
-                                Text(
-                                "Wind",
-                                style:
-                                    TextStyle(color: Colors.white, fontSize: 20),
-                              ),
-                              Text(
-                            "12.2km/h",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          )
-                              ],)
+                              Column(
+                                children: [
+                                  const Text(
+                                    "Wind",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                  Text(
+                                    ws,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  )
+                                ],
+                              )
                             ],
                           ),
                         ),
@@ -124,30 +148,31 @@ class _HomepageState extends State<Homepage> {
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 41, 155, 248),
                               borderRadius: BorderRadius.circular(4)),
-                          child: const Row(
+                          child:  Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.water,
                                 color: Colors.white,
                                 size: 40,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
-                             Column(
-                              children: [
-                                 Text(
-                                "Humidity",
-                                style:
-                                    TextStyle(color: Colors.white, fontSize: 20),
-                              ),
-                               Text(
-                            "50%",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          )
-                              ],
-                             )
+                              Column(
+                                children: [
+                                  const Text(
+                                    "Humidity",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                  Text(
+                                    hum,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  )
+                                ],
+                              )
                             ],
                           ),
                         ),
@@ -166,30 +191,31 @@ class _HomepageState extends State<Homepage> {
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 41, 155, 248),
                               borderRadius: BorderRadius.circular(4)),
-                          child: const Row(
+                          child:  Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.remove_red_eye,
                                 color: Colors.white,
                                 size: 40,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
-                             Column(
-                              children: [
-                                 Text(
-                                "Visibility",
-                                style:
-                                    TextStyle(color: Colors.white, fontSize: 20),
-                              ),
-                              Text(
-                            "5 km",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          )
-                              ],
-                             )
+                              Column(
+                                children: [
+                                  const Text(
+                                    "Visibility",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                  Text(
+                                    vis,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  )
+                                ],
+                              )
                             ],
                           ),
                         ),
@@ -201,28 +227,29 @@ class _HomepageState extends State<Homepage> {
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 41, 155, 248),
                               borderRadius: BorderRadius.circular(4)),
-                          child: const Row(
+                          child:  Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.air,
                                 color: Colors.white,
                                 size: 40,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Column(
                                 children: [
+                                  const Text(
+                                    "Pressure",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
                                   Text(
-                                "Pressure",
-                                style:
-                                    TextStyle(color: Colors.white, fontSize: 20),
-                              ),
-                               Text(
-                            "1003 mb",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          )
+                                    prs,
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  )
                                 ],
                               )
                             ],
@@ -245,7 +272,8 @@ class _HomepageState extends State<Homepage> {
                       );
                     },
                     child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 100, vertical: 16),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 100, vertical: 16),
                       child: Text(
                         "Next 7 Days",
                         style: TextStyle(fontSize: 22),
