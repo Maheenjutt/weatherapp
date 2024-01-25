@@ -113,9 +113,9 @@ class _HomepageState extends State<Homepage> {
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),
-                  Text(
-                    "Feels like $data",
-                    style: const TextStyle(color: Colors.white, fontSize: 30),
+                  const Text(
+                    "Feels like",
+                    style: TextStyle(color: Colors.white, fontSize: 30),
                   ),
                   Text(
                     tempfl,
