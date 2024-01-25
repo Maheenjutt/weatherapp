@@ -14,7 +14,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  late String temp = "",
+  late String temp = "0",
       hum = "",
       tempfl = "",
       prs = "",
@@ -26,10 +26,11 @@ class _HomepageState extends State<Homepage> {
   var data;
   var lat = 30.181459, long = 71.492157;
   Future<void> api() async {
-    http.Response response = await http.get(Uri.parse('http://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$long&appid=$APIKey&units=metric'));
+    http.Response response = await http.get(Uri.parse(
+        'http://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$long&appid=$APIKey&units=metric'));
     if (response.statusCode == 200) {
       setState(() {
-       data = response.body.toString();
+        data = response.body.toString();
         temp = jsonDecode(data)["main"]["temp"].toString();
         hum = jsonDecode(data)["main"]["humidity"].toString();
         tempfl = jsonDecode(data)["main"]["feels_like"].toString();
@@ -37,7 +38,29 @@ class _HomepageState extends State<Homepage> {
         vis = jsonDecode(data)["visibility"].toString();
         loc = jsonDecode(data)["name"].toString();
         ws = jsonDecode(data)["wind"]["speed"].toString();
+        wthr = jsonDecode(data)["weather"][0]["main"].toString();
+        icon = jsonDecode(data)["weather"][0]["id"].toString();
       });
+    }
+  }
+
+  String getWeatherIcon(int condition) {
+    if (condition < 300) {
+      return '🌩';
+    } else if (condition < 400) {
+      return '🌧';
+    } else if (condition < 600) {
+      return '☔';
+    } else if (condition < 700) {
+      return '⛄';
+    } else if (condition < 800) {
+      return '🌫';
+    } else if (condition == 800) {
+      return '🌞';
+    } else if (condition <= 804) {
+      return '☁';
+    } else {
+      return '🛰';
     }
   }
 
@@ -47,9 +70,6 @@ class _HomepageState extends State<Homepage> {
     super.initState();
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +77,7 @@ class _HomepageState extends State<Homepage> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: const Color(0xFF2F87CF),
-        title:  Text(
+        title: Text(
           loc,
           style: const TextStyle(fontSize: 25),
         ),
@@ -79,26 +99,33 @@ class _HomepageState extends State<Homepage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Center(
-                    child: Icon(
-                      Icons.cloud,
-                      color: Colors.white,
-                      size: 230,
-                    ),
-                  ),
                   Text(
-                    "$temp\u00B0",
+                    icon == "" ? "" : getWeatherIcon(int.parse(icon)),
                     style: const TextStyle(
                         fontSize: 120,
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),
-                   const Text(
-                    "Feels like",
-                    style: TextStyle(color: Colors.white, fontSize: 30),
+                  Text(
+                    "${temp.substring(0,1)}\u00B0",
+                    style: const TextStyle(
+                        fontSize: 120,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   ),
-                   Text(
+                  Text(
+                    "Feels like $data",
+                    style: const TextStyle(color: Colors.white, fontSize: 30),
+                  ),
+                  Text(
                     tempfl,
+                    style: const TextStyle(color: Colors.white, fontSize: 22),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    wthr,
                     style: const TextStyle(color: Colors.white, fontSize: 22),
                   ),
                   const SizedBox(
@@ -148,7 +175,7 @@ class _HomepageState extends State<Homepage> {
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 41, 155, 248),
                               borderRadius: BorderRadius.circular(4)),
-                          child:  Row(
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Icon(
@@ -191,7 +218,7 @@ class _HomepageState extends State<Homepage> {
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 41, 155, 248),
                               borderRadius: BorderRadius.circular(4)),
-                          child:  Row(
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Icon(
@@ -227,7 +254,7 @@ class _HomepageState extends State<Homepage> {
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 41, 155, 248),
                               borderRadius: BorderRadius.circular(4)),
-                          child:  Row(
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Icon(
