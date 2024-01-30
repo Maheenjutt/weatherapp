@@ -1,4 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+// ignore: constant_identifier_names
+const APIKey = "d178238183d301867464f77d6acca3cb";
 
 class Weather extends StatefulWidget {
   const Weather({super.key});
@@ -8,6 +14,62 @@ class Weather extends StatefulWidget {
 }
 
 class _WeatherState extends State<Weather> {
+  late String temp = "0",
+      hum = "",
+      tempfl = "",
+      prs = "",
+      vis = "",
+      wthr = "",
+      loc = "",
+      ws = "",
+      icon = "";
+  var data;
+  var lat = 30.181459, long = 71.492157;
+  Future<void> api() async {
+    http.Response response = await http.get(Uri.parse(
+        'http://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$long&appid=$APIKey&units=metric'));
+    if (response.statusCode == 200) {
+      setState(() {
+        data = response.body.toString();
+        temp = jsonDecode(data)["main"]["temp"].toString();
+        hum = jsonDecode(data)["main"]["humidity"].toString();
+        tempfl = jsonDecode(data)["main"]["feels_like"].toString();
+        prs = jsonDecode(data)["main"]["pressure"].toString();
+        vis = jsonDecode(data)["visibility"].toString();
+        loc = jsonDecode(data)["name"].toString();
+        ws = jsonDecode(data)["wind"]["speed"].toString();
+        wthr = jsonDecode(data)["weather"][0]["main"].toString();
+        icon = jsonDecode(data)["weather"][0]["id"].toString();
+      });
+    }
+  }
+
+  String getWeatherIcon(int condition) {
+    if (condition < 300) {
+      return '🌩';
+    } else if (condition < 400) {
+      return '🌧';
+    } else if (condition < 600) {
+      return '☔';
+    } else if (condition < 700) {
+      return '⛄';
+    } else if (condition < 800) {
+      return '🌫';
+    } else if (condition == 800) {
+      return '🌞';
+    } else if (condition <= 804) {
+      return '☁';
+    } else {
+      return '🛰';
+    }
+  }
+
+  @override
+  void initState() {
+    api();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,49 +106,53 @@ class _WeatherState extends State<Weather> {
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 41, 155, 248),
                           borderRadius: BorderRadius.circular(16)),
-                      child: const Column(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Icon(
-                                Icons.cloud,
-                                color: Colors.white,
-                                size: 80,
+                              Text(
+                                icon == ""
+                                    ? ""
+                                    : getWeatherIcon(int.parse(icon)),
+                                style: const TextStyle(
+                                    fontSize: 120,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
                               ),
                               Column(
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Today",
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 18),
                                   ),
                                   Text(
-                                    "23\u00B0",
-                                    style: TextStyle(
+                                    "${temp.substring(0, 1)}\u00B0",
+                                    style: const TextStyle(
                                         fontSize: 40,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white),
                                   ),
                                   Text(
-                                    "heavy Rain",
-                                    style: TextStyle(
+                                    wthr,
+                                    style: const TextStyle(
                                         color: Colors.white, fontSize: 18),
                                   )
                                 ],
                               )
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
-                          Divider(
+                          const Divider(
                             indent: 20,
                             color: Colors.white,
                             thickness: 0.08,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           Row(
@@ -94,56 +160,56 @@ class _WeatherState extends State<Weather> {
                             children: [
                               Column(
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Wind",
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 15),
                                   ),
                                   Text(
-                                    "12.2km/h",
-                                    style: TextStyle(
+                                    ws,
+                                    style: const TextStyle(
                                         color: Colors.white, fontSize: 18),
                                   )
                                 ],
                               ),
                               Column(
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Humidity",
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 15),
                                   ),
                                   Text(
-                                    "50%",
-                                    style: TextStyle(
+                                    hum,
+                                    style: const TextStyle(
                                         color: Colors.white, fontSize: 18),
                                   )
                                 ],
                               ),
                               Column(
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Visibility",
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 15),
                                   ),
                                   Text(
-                                    "5km",
-                                    style: TextStyle(
+                                    vis,
+                                    style: const TextStyle(
                                         color: Colors.white, fontSize: 18),
                                   )
                                 ],
                               ),
                               Column(
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Pressure",
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 15),
                                   ),
                                   Text(
-                                    "1003 mb",
-                                    style: TextStyle(
+                                    prs,
+                                    style: const TextStyle(
                                         color: Colors.white, fontSize: 18),
                                   )
                                 ],
