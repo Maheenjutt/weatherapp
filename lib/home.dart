@@ -129,7 +129,7 @@ class _WeatherState extends State<Weather> {
                                         color: Colors.white, fontSize: 18),
                                   ),
                                   Text(
-                                    "${temp.substring(0, 1)}\u00B0",
+                                    "${double.parse(temp) < 10 ?temp.substring(0,1):temp.substring(0,2)}\u00B0",
                                     style: const TextStyle(
                                         fontSize: 40,
                                         fontWeight: FontWeight.bold,
